@@ -1,140 +1,151 @@
-# Python Guestbook — Project Plan
+# 🎓 Python Graduation Guestbook — Project Plan & Documentation
 
 ## 1. Tổng quan dự án
 
-**Tên dự án:** Python Guestbook  
+**Tên dự án:** Python Graduation Guestbook (Sổ Lưu Bút & Tường Ảnh Kỷ Yếu Tốt Nghiệp)  
 **Tên GitHub Repository:** `python-guestbook`  
-**Mô tả repo:** A Python Flask guestbook application built using Manual Coding and AI-assisted Vibe Coding.
+**Mô tả repo:** A Python Flask graduation memory wall & guestbook application built using Manual Coding and AI-assisted Vibe Coding.
 
-Ứng dụng **Guestbook (Sổ lưu bút)** cho phép khách truy cập:
+### 🌐 Link Demo Trực Tiếp (Live Local Tunnel)
+Khi máy chủ local đang chạy và bật cổng chia sẻ (Port Forwarding qua VS Code Dev Tunnels), các thành viên trong nhóm có thể truy cập trực tiếp giao diện mẫu tại đây để tham khảo:
+👉 **Link xem Demo:** [https://fjsllsl5-5000.asse.devtunnels.ms/](https://fjsllsl5-5000.asse.devtunnels.ms/)  
+*(Lưu ý: Link hoạt động khi máy chủ phát triển đang mở ứng dụng Flask ở cổng `5000`).*
 
-- Xem tất cả lời nhắn đã lưu.
-- Thêm lời nhắn mới thông qua biểu mẫu.
-- Xóa lời nhắn theo ID.
-- Lưu trữ dữ liệu lâu dài.
-- Xem thống kê số lượng lời nhắn và biểu đồ.
+---
 
-**Yêu cầu quan trọng:** Xây dựng **2 phiên bản độc lập**: **Manual Code** (tự viết) và **Vibe Code** (AI hỗ trợ viết code).
+### 💡 Ý tưởng chủ đề (Concept): "Lưu Bút Ngày Ra Trường"
+Thay vì làm một trang Guestbook dạng danh sách văn bản đơn thuần, dự án được thiết kế theo chủ đề **Kỷ yếu & Lễ tốt nghiệp**, nơi mỗi lời nhắn (`entries`) được thể hiện như một **bức ảnh kỷ niệm kèm lời nhắn nhủ trước khi ra trường**:
+- **Trải nghiệm tương tác:** Trên trang chủ (`/`), các lời nhắn được hiển thị dưới dạng các tấm thẻ ảnh gắn kèm tên người gửi (`name`). Khi người dùng **bấm (click) vào từng tấm ảnh**, một hộp thoại chi tiết (Modal) sẽ hiện ra giữa màn hình hiển thị bức ảnh phóng to, toàn bộ tâm thư/lời chúc (`message`) và nút xóa lời nhắn theo `ID`.
+- **Thực hiện qua 2 phiên bản độc lập** (giữ nguyên 100% cấu trúc dữ liệu `id`, `name`, `message` của đề bài):
+  1. **Manual Code (`manual/` — Bảng Ghim Kỷ Yếu):** Giao diện tự code tay theo phong cách **Bảng gỗ bần (Corkboard)** với các tấm ảnh vuông vức gắn đinh ghim, dùng HTML/CSS/JS thuần cơ bản, tối giản và dễ giải thích từng dòng lệnh.
+  2. **Vibe Code (`vibe-code/` — Dây Đèn Treo Ảnh Polaroid):** Giao diện có AI hỗ trợ tạo hiệu ứng **Dây treo ảnh Polaroid đung đưa** (`CSS Keyframes Animation`) và hiệu ứng thẻ trượt mượt mà khi mở xem lời nhắn.
+
+Ứng dụng cho phép khách truy cập:
+- Xem tất cả thẻ ảnh lưu bút đã lưu trên bảng/dây treo.
+- Click vào từng bức ảnh để đọc chi tiết lời nhắn trong lễ tốt nghiệp.
+- Thêm lưu bút mới thông qua biểu mẫu (`name`, `message`).
+- Xóa lưu bút theo `ID` ngay trong khung xem chi tiết.
+- Lưu trữ dữ liệu lâu dài (JSON & SQLite).
+- Xem thống kê tổng số lời chúc và biểu đồ Top 5 người tích cực viết lưu bút nhất.
 
 ### Thiết lập GitHub repo
-
 - **Repository name:** `python-guestbook`
 - **Visibility:** Public (trừ khi giảng viên yêu cầu Private).
 - **README:** Tạo sẵn.
 - **.gitignore:** Chọn Python.
 - **License:** Có thể để None.
 
+---
+
 ## 2. Công nghệ sử dụng
 
 | Thành phần | Công nghệ | Lý do |
 |---|---|---|
 | Backend | Python + Flask | Nhẹ, đơn giản, phù hợp bài tập |
-| Frontend | HTML + CSS | Phù hợp yêu cầu HTML cơ bản |
+| Frontend | HTML + CSS + Vanilla JS | Phù hợp yêu cầu HTML cơ bản & xử lý click mở thẻ ảnh |
 | Template Engine | Jinja2 | Tích hợp sẵn với Flask |
 | Lưu trữ ban đầu | Python List | Yêu cầu buổi 1 |
-| Lưu trữ bằng file | JSON | Yêu cầu buổi 2 |
-| Database | SQLite | Đáp ứng yêu cầu có DB |
-| Biểu đồ | Matplotlib | Yêu cầu vẽ biểu đồ ở buổi 2 |
+| Lưu trữ bằng file | JSON (`data.json`) | Yêu cầu buổi 2 |
+| Database | SQLite (`guestbook.db`) | Đáp ứng yêu cầu có DB |
+| Biểu đồ | Matplotlib | Yêu cầu vẽ biểu đồ cột ở buổi 2 |
+| Chia sẻ Demo | VS Code Dev Tunnels | Chia sẻ localhost (`:5000`) cho cả nhóm xem trực tiếp |
 | Quản lý mã nguồn | Git + GitHub | Hỗ trợ làm việc nhóm |
 | Vibe Code | AI Coding Assistant | Thực hiện phiên bản có AI hỗ trợ |
 
 > **Lưu ý:** Đề bài yêu cầu sử dụng **Python List** ở buổi 1, **JSON** ở buổi 2, đồng thời có yêu cầu tổng quát là **có DB**. Vì vậy, cần hoàn thành List và JSON theo từng giai đoạn trước; sau đó bổ sung SQLite thay vì bỏ qua các giai đoạn đầu.
 
+---
+
 ## 3. Kế hoạch triển khai (Roadmap)
 
 ### Phase 1 — Guestbook cơ bản (Buổi 1)
 
-**Mục tiêu:** Xây dựng website bằng Flask và HTML cơ bản, dùng Python List toàn cục để lưu lời nhắn khi ứng dụng đang chạy.
+**Mục tiêu:** Xây dựng website Lưu bút tốt nghiệp bằng Flask và HTML cơ bản, dùng Python List toàn cục để lưu lời nhắn khi ứng dụng đang chạy.
 
 **Chức năng:**
-
 - `GET /`
   - Lấy toàn bộ lời nhắn từ Python List.
-  - Render `index.html` với biến `entries`.
+  - Render `index.html` với biến `entries` dưới dạng các tấm ảnh ghim trên bảng/dây.
+  - Bấm vào từng ảnh để xem chi tiết `name`, `message` và nút xóa.
 - `GET /add`
-  - Hiển thị form với 2 trường `name` và `message`.
+  - Hiển thị form viết lưu bút mới với 2 trường `name` (Tên tân cử nhân) và `message` (Điều muốn nói trong lễ tốt nghiệp).
 - `POST /add`
   - Kiểm tra không để trống `name` hoặc `message`.
   - Nếu hợp lệ: thêm lời nhắn và redirect về `/`.
   - Nếu không hợp lệ: hiển thị lại form kèm thông báo lỗi.
 - `POST /delete/<int:id>`
-  - Xóa lời nhắn có ID tương ứng.
+  - Xóa thẻ lưu bút có ID tương ứng.
   - Redirect về `/`.
   - *Đề bài cho phép POST hoặc GET; kế hoạch chọn POST để thao tác xóa an toàn và hợp lý hơn.*
 
-**Kết quả cần đạt:** Website hiển thị, thêm và xóa lời nhắn được. Dữ liệu lưu trong Python List nên sẽ mất khi tắt ứng dụng ở giai đoạn này.
+**Kết quả cần đạt:** Website hiển thị bảng/dây ảnh lưu bút, bấm vào xem chi tiết, thêm và xóa lời nhắn được. Dữ liệu lưu trong Python List nên sẽ mất khi tắt ứng dụng ở giai đoạn này.
 
 ### Phase 2 — JSON Persistence (Buổi 2)
 
-**Mục tiêu:** Dữ liệu không bị mất sau khi tắt hoặc khởi động lại Flask.
+**Mục tiêu:** Dữ liệu lưu bút không bị mất sau khi tắt hoặc khởi động lại Flask.
 
 **Công việc:**
-
 - Đọc dữ liệu từ `data.json` khi khởi động, nếu file tồn tại.
-- Khởi tạo dữ liệu rỗng nếu chưa có file.
+- Khởi tạo dữ liệu mẫu/rỗng nếu chưa có file.
 - Ghi lại file JSON sau mỗi lần thêm hoặc xóa lời nhắn.
-- Đảm bảo mỗi lời nhắn có ID riêng để tránh xóa nhầm.
+- Đảm bảo mỗi lời nhắn có ID riêng để tránh xóa nhầm và tự động gắn ảnh kỷ niệm tương ứng theo ID.
 
-**Kết quả cần đạt:** Restart Flask vẫn giữ nguyên dữ liệu lời nhắn.
+**Kết quả cần đạt:** Restart Flask vẫn giữ nguyên các bức ảnh và lời nhắn lưu bút.
 
 ### Phase 3 — Statistics & Charts (Buổi 2)
 
-**Mục tiêu:** Xây dựng trang thống kê kèm biểu đồ.
+**Mục tiêu:** Xây dựng trang thống kê độ sôi nổi của bảng lưu bút kèm biểu đồ.
 
 **Chức năng:**
-
-- `GET /stats`: Hiển thị tổng số lời nhắn.
-- Thống kê **5 người gửi nhiều lời nhắn nhất**, tính theo `name`.
-- Dùng Matplotlib tạo **biểu đồ cột (bar chart)** cho số lượng lời nhắn theo người gửi.
-- Xuất biểu đồ thành ảnh PNG, ví dụ `static/stats.png`.
+- `GET /stats`: Hiển thị tổng số lời nhắn lưu bút đã ghi.
+- Thống kê **Top 5 người gửi nhiều lời nhắn nhất**, tính theo `name`.
+- Dùng Matplotlib tạo **biểu đồ cột (bar chart)** minh họa số lượng lời nhắn theo người gửi.
+- Xuất biểu đồ thành ảnh PNG tại `static/stats.png`.
 - Nhúng ảnh biểu đồ vào `stats.html`.
 - Xử lý trường hợp chưa có lời nhắn để trang thống kê không bị lỗi.
 
-**Kết quả cần đạt:** Trang `/stats` hiển thị đúng số liệu, top 5 và biểu đồ.
+**Kết quả cần đạt:** Trang `/stats` hiển thị đúng số liệu, danh sách Top 5 và biểu đồ cột.
 
 ### Phase 4 — SQLite Database (Hoàn thiện yêu cầu tổng quát)
 
 **Mục tiêu:** Bổ sung Database theo yêu cầu của đề bài.
 
 **Công việc:**
-
-- Tạo SQLite Database.
-- Tạo bảng `entries` dự kiến gồm:
-  - `id`: ID lời nhắn.
+- Tạo SQLite Database (`guestbook.db`).
+- Tạo bảng `entries` gồm:
+  - `id`: ID lời nhắn (Khóa chính tự tăng).
   - `name`: Tên người gửi.
-  - `message`: Nội dung lời nhắn.
+  - `message`: Nội dung lời nhắn tốt nghiệp.
   - `created_at`: Thời điểm tạo.
-- Xử lý đọc, thêm và xóa lời nhắn qua SQLite.
-- Giữ lại phần mã/dữ liệu theo giai đoạn List và JSON để chứng minh tiến trình bài tập.
+- Xử lý đọc, thêm và xóa lời nhắn qua SQLite, đồng thời đồng bộ với Python List và `data.json` để bảo toàn yêu cầu của các giai đoạn trước.
 
-**Kết quả cần đạt:** Ứng dụng có Database và các chức năng cũ vẫn hoạt động.
+**Kết quả cần đạt:** Ứng dụng có Database hoạt động ổn định cùng toàn bộ chức năng cũ.
 
 > SQLite là **phương án kỹ thuật đề xuất** để đáp ứng dòng yêu cầu "Có DB"; đề bài không chỉ định hệ quản trị cơ sở dữ liệu cụ thể.
 
 ### Phase 5 — Manual Code vs Vibe Code (So sánh)
 
-**Mục tiêu:** Hoàn thiện và đối chiếu hai phiên bản có cùng yêu cầu chức năng.
+**Mục tiêu:** Hoàn thiện và đối chiếu hai phiên bản có cùng yêu cầu chức năng và cùng chủ đề Lưu bút tốt nghiệp.
 
-**Manual Code:**
-
-- Tự thiết kế cấu trúc và viết code.
-- Hiểu rõ routes, xử lý form, Jinja2, dữ liệu và thống kê.
+**Manual Code (`manual/`):**
+- Tự thiết kế cấu trúc và viết code giao diện **Bảng ghim kỷ yếu (Corkboard)** vuông vức, mộc mạc.
+- Hiểu rõ routes, xử lý form, Jinja2, sự kiện click mở hộp thoại cơ bản, lưu trữ dữ liệu và thống kê.
 - Ghi lại các vấn đề và cách xử lý.
 
-**Vibe Code:**
-
-- Dùng AI Coding Assistant hỗ trợ sinh và chỉnh sửa code.
+**Vibe Code (`vibe-code/`):**
+- Dùng AI Coding Assistant hỗ trợ sinh và chỉnh sửa code giao diện **Dây đèn treo ảnh Polaroid** với hiệu ứng đung đưa và thẻ trượt hiện đại.
 - Chủ động mô tả yêu cầu, chạy thử, kiểm tra và sửa lỗi.
 - Ghi lại quy trình prompting và các bước đã thực hiện.
 
 **So sánh:**
-
-- Cấu trúc và độ dễ hiểu của mã nguồn.
+- Cấu trúc và độ dễ hiểu của mã nguồn (HTML/CSS thuần tự viết vs CSS Animation do AI sinh).
 - Thời gian thực hiện.
 - Số lỗi phát sinh và cách sửa.
 - Mức độ hoàn thành các chức năng theo đề bài.
 
 **Kết quả cần đạt:** Hai phiên bản chạy độc lập, có tài liệu so sánh rõ ràng.
+
+---
 
 ## 4. Cấu trúc thư mục đề xuất
 
@@ -152,6 +163,9 @@ python-guestbook/
 ├── vibe-code/
 │   ├── app.py
 │   ├── templates/
+│   │   ├── index.html
+│   │   ├── add.html
+│   │   └── stats.html
 │   ├── static/
 │   └── data.json
 ├── docs/
@@ -161,62 +175,3 @@ python-guestbook/
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-```
-
-**Giải thích:**
-
-- `manual/`: Phiên bản tự viết code.
-- `vibe-code/`: Phiên bản AI hỗ trợ phát triển.
-- `docs/`: Lưu quy trình làm việc và báo cáo so sánh.
-- `requirements.txt`: Các thư viện Python cần cài đặt.
-- `README.md`: Giới thiệu và hướng dẫn chạy dự án.
-- `.gitignore`: Loại trừ `.venv/`, cache, dữ liệu chạy thực tế và thông tin nhạy cảm nếu có.
-
-> Cấu trúc trên là **dự kiến ban đầu**. Khi triển khai SQLite sẽ bổ sung thư mục/file tương ứng. Nếu `data.json` chỉ là dữ liệu chạy thực tế, nên đưa vào `.gitignore` và dùng một file JSON mẫu riêng để chia sẻ.
-
-## 5. Kế hoạch kiểm thử
-
-| Test case | Kết quả mong đợi |
-|---|---|
-| Truy cập `GET /` | Hiển thị danh sách lời nhắn |
-| Truy cập `GET /add` | Hiển thị form thêm lời nhắn |
-| Gửi lời nhắn hợp lệ | Thêm thành công, redirect về `/` |
-| Để trống `name` hoặc `message` | Hiển thị thông báo lỗi |
-| Xóa ID tồn tại | Xóa đúng lời nhắn |
-| Xóa ID không tồn tại | Ứng dụng không bị lỗi |
-| Restart Flask sau Phase 2 | Dữ liệu JSON vẫn còn |
-| Truy cập `GET /stats` | Hiển thị tổng số lời nhắn và top 5 |
-| Chưa có lời nhắn | Trang thống kê không bị lỗi |
-| Có nhiều lời nhắn cùng `name` | Số lượng thống kê chính xác |
-| Xem biểu đồ | Ảnh PNG hiển thị và phù hợp số liệu |
-| Chạy hai phiên bản | Manual và Vibe Code đều hoạt động độc lập |
-
-## 6. Thứ tự thực hiện đề xuất
-
-1. Tạo repository `python-guestbook` trên GitHub.
-2. Clone repo về máy và mở trong IDE.
-3. Tạo môi trường ảo Python và cài Flask.
-4. Tạo cấu trúc thư mục `manual/` và `vibe-code/`.
-5. Hoàn thành **Phase 1** trong `manual/`, hiểu rõ từng route.
-6. Bổ sung **Phase 2** (JSON) và **Phase 3** (thống kê, Matplotlib).
-7. Bổ sung SQLite theo **Phase 4**, bảo toàn yêu cầu của những giai đoạn trước.
-8. Thực hiện các chức năng tương đương trong `vibe-code/` bằng AI Assistant.
-9. Kiểm thử hai phiên bản theo bảng test case.
-10. Viết `README.md` và tài liệu `docs/comparison.md` để nộp hoặc trình bày.
-
-## 7. Tiêu chí hoàn thành dự án
-
-- [ ] Hoàn thành trang hiển thị danh sách lời nhắn.
-- [ ] Hoàn thành form thêm lời nhắn có validation.
-- [ ] Hoàn thành xóa lời nhắn theo ID.
-- [ ] Buổi 1 có bản chạy sử dụng Python List.
-- [ ] Buổi 2 có lưu và tải dữ liệu bằng JSON.
-- [ ] Có trang `/stats` với tổng số lời nhắn và top 5 người gửi.
-- [ ] Có biểu đồ cột được vẽ bằng Matplotlib và nhúng vào HTML.
-- [ ] Có Database theo yêu cầu tổng quát.
-- [ ] Có hai phiên bản **Manual** và **Vibe Code**.
-- [ ] Có tài liệu hướng dẫn chạy và so sánh kết quả.
-
----
-
-**Nguyên tắc triển khai:** Ưu tiên hoàn thành bản Manual trước để nắm chắc Flask, routes, templates, xử lý form và lưu trữ dữ liệu; sau đó xây dựng bản Vibe Code độc lập dựa trên cùng đặc tả chức năng để việc so sánh có ý nghĩa.
