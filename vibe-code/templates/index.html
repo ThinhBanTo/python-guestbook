@@ -2,11 +2,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Lưu bút ngày ra trường</title>
 
@@ -20,7 +16,6 @@
     <!-- Nền chuyển động nằm dưới nội dung -->
     <div class="background-scene" aria-hidden="true">
         <div class="background-glow"></div>
-
         <div class="background-stars"></div>
 
         <div class="meteor-field">
@@ -96,17 +91,11 @@
 
                 <div>
                     <strong>KỶ YẾU TỐT NGHIỆP</strong>
-
-                    <span class="graduation-year">
-                        2026
-                    </span>
+                    <span class="graduation-year">2026</span>
                 </div>
             </div>
 
-            <a
-                class="primary-link"
-                href="{{ url_for('add') }}"
-            >
+            <a class="primary-link" href="{{ url_for('add') }}">
                 Viết lưu bút mới
             </a>
         </div>
@@ -125,9 +114,7 @@
         <div class="section-heading">
             <h2>Tường ảnh của lớp</h2>
 
-            <span>
-                {{ entries|length }} lời nhắn
-            </span>
+            <span>{{ entries|length }} lời nhắn</span>
         </div>
 
         {% if entries %}
@@ -169,10 +156,7 @@
                         aria-label="Đọc lưu bút của {{ item.name }}"
                         aria-haspopup="dialog"
                     >
-                        <span
-                            class="clip"
-                            aria-hidden="true"
-                        ></span>
+                        <span class="clip" aria-hidden="true"></span>
 
                         <span class="photo-frame">
                             <img
@@ -186,10 +170,7 @@
                                 "
                             >
 
-                            <span
-                                class="photo-placeholder"
-                                hidden
-                            >
+                            <span class="photo-placeholder" hidden>
                                 {{ item.name[:1]|upper }}
                             </span>
                         </span>
@@ -202,9 +183,7 @@
             </section>
         {% else %}
             <section class="empty-state">
-                <p>
-                    Chưa có lời nhắn nào trên tường ảnh.
-                </p>
+                <p>Chưa có lời nhắn nào trên tường ảnh.</p>
 
                 <a href="{{ url_for('add') }}">
                     Viết lời nhắn đầu tiên
@@ -266,16 +245,11 @@
             </div>
 
             <div class="modal-content">
-                <p class="modal-label">
-                    LỜI NHẮN TỪ
-                </p>
+                <p class="modal-label">LỜI NHẮN TỪ</p>
 
                 <h2 id="modalName"></h2>
 
-                <p
-                    class="modal-message"
-                    id="modalMessage"
-                ></p>
+                <p class="modal-message" id="modalMessage"></p>
 
                 <div class="modal-actions">
                     <button
@@ -286,15 +260,12 @@
                         Quay lại
                     </button>
 
-                    <form
-                        id="deleteForm"
-                        method="POST"
-                    >
+                    <form id="deleteForm" method="POST">
                         <button
                             class="delete-button"
                             type="submit"
                         >
-                            Xóa lời nhắn #<span id="modalId"></span>
+                            Xóa lời nhắn
                         </button>
                     </form>
                 </div>
@@ -307,9 +278,7 @@
          * MODAL XEM LỜI NHẮN
          */
         const modal = document.getElementById("photoModal");
-
-        const modalImage =
-            document.getElementById("modalImage");
+        const modalImage = document.getElementById("modalImage");
 
         const placeholder =
             document.getElementById("modalPlaceholder");
@@ -335,21 +304,14 @@
             modalImage.hidden = true;
             placeholder.hidden = false;
 
-            document.getElementById(
-                "modalInitial"
-            ).textContent = card.dataset.initial;
+            document.getElementById("modalInitial").textContent =
+                card.dataset.initial;
 
-            document.getElementById(
-                "modalName"
-            ).textContent = card.dataset.name;
+            document.getElementById("modalName").textContent =
+                card.dataset.name;
 
-            document.getElementById(
-                "modalMessage"
-            ).textContent = card.dataset.message;
-
-            document.getElementById(
-                "modalId"
-            ).textContent = card.dataset.id;
+            document.getElementById("modalMessage").textContent =
+                card.dataset.message;
 
             deleteForm.action = card.dataset.deleteUrl;
 
@@ -369,12 +331,7 @@
             modalImage.src = card.dataset.imageUrl;
 
             modal.classList.add("is-open");
-
-            modal.setAttribute(
-                "aria-hidden",
-                "false"
-            );
-
+            modal.setAttribute("aria-hidden", "false");
             document.body.classList.add("modal-open");
 
             pageSections.forEach(function (section) {
@@ -386,12 +343,7 @@
 
         function closeModal() {
             modal.classList.remove("is-open");
-
-            modal.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
+            modal.setAttribute("aria-hidden", "true");
             document.body.classList.remove("modal-open");
 
             pageSections.forEach(function (section) {
@@ -403,16 +355,13 @@
             }
         }
 
-        document.querySelectorAll(
-            ".memory-card"
-        ).forEach(function (card) {
+        document.querySelectorAll(".memory-card").forEach(function (card) {
             card.addEventListener("click", function () {
                 openModal(card);
             });
         });
 
         closeButton.addEventListener("click", closeModal);
-
         cancelButton.addEventListener("click", closeModal);
 
         modal.addEventListener("click", function (event) {
@@ -433,9 +382,7 @@
             // Giữ phím Tab bên trong modal.
             if (event.key === "Tab") {
                 const buttons = modal.querySelectorAll("button");
-
                 const first = buttons[0];
-
                 const last = buttons[buttons.length - 1];
 
                 if (
@@ -463,7 +410,6 @@
                 event.preventDefault();
             }
         });
-
 
         /*
          * BẬT / TẮT HIỆU ỨNG NỀN
