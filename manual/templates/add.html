@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Viết lưu bút mới</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body class="form-page">
+    <main class="form-layout">
+        <section class="form-introduction">
+            <a
+                class="back-link"
+                href="{{ url_for('index') }}"
+            >
+                ← Trở lại tường ảnh
+            </a>
+
+            <div class="form-copy">
+                <p class="form-eyebrow">
+                    LƯU BÚT TỐT NGHIỆP
+                </p>
+
+                <h1>Viết lời nhắn của bạn</h1>
+
+                <p class="form-description">
+                    Viết một lời chúc, một kỷ niệm hoặc điều bạn
+                    muốn nhắn gửi tới mọi người trước ngày ra trường.
+                </p>
+            </div>
+        </section>
+
+        <section class="form-panel">
+            {% if error %}
+                <div class="form-error">
+                    {{ error }}
+                </div>
+            {% endif %}
+
+            <form
+                action="{{ url_for('add') }}"
+                method="POST"
+            >
+                <div class="form-field">
+                    <label for="name">
+                        Tên người gửi
+                    </label>
+
+                    <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value="{{ name or '' }}"
+                        maxlength="50"
+                        placeholder="Ví dụ: Minh Đức"
+                        autocomplete="name"
+                        required
+                    >
+                </div>
+
+                <div class="form-field">
+                    <label for="message">
+                        Lời nhắn
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="7"
+                        maxlength="500"
+                        placeholder="Viết lời nhắn của bạn tại đây..."
+                        required
+                    >{{ message or '' }}</textarea>
+
+                    <p class="field-note">
+                        Tối đa 500 ký tự
+                    </p>
+                </div>
+
+                <div class="form-actions">
+                    <a
+                        class="cancel-link"
+                        href="{{ url_for('index') }}"
+                    >
+                        Hủy
+                    </a>
+
+                    <button
+                        class="submit-button"
+                        type="submit"
+                    >
+                        Đăng lưu bút
+                    </button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

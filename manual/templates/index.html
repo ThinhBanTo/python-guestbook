@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lưu bút ngày ra trường</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-top">
+            <div class="graduation-label">
+                <span class="label-decoration"></span>
+
+                <div>
+                    <strong>KỶ YẾU TỐT NGHIỆP</strong>
+                    <span class="graduation-year">2026</span>
+                </div>
+            </div>
+
+            <a
+                class="primary-link"
+                href="{{ url_for('add') }}"
+            >
+                Viết lưu bút mới
+            </a>
+        </div>
+
+        <div class="hero-content">
+            <h1>Lời tâm sự thầm kín</h1>
+
+            <p class="intro">
+                Một góc nhỏ để lưu lại những câu chuyện, lời chúc
+                và kỷ niệm của chúng ta trước khi rời giảng đường.
+            </p>
+        </div>
+    </header>
+
+    <main class="page-container">
+        <div class="section-heading">
+            <h2>Tường ảnh của lớp</h2>
+
+            <span>
+                {{ entries|length }} lời nhắn
+            </span>
+        </div>
+
+        {% if entries %}
+            <section class="memory-grid">
+                {% for item in entries %}
+                    <button
+                        class="memory-card"
+                        type="button"
+                        data-id="{{ item.id }}"
+                        data-name="{{ item.name }}"
+                        data-message="{{ item.message }}"
+                        data-initial="{{ item.name[0]|upper }}"
+                        data-image-url="https://picsum.photos/seed/grad{{ item.id }}/700/520"
+                        data-delete-url="{{ url_for('delete', id=item.id) }}"
+                    >
+                        <span class="clip"></span>
+
+                        <div class="photo-frame">
+                            <img
+                                src="https://picsum.photos/seed/grad{{ item.id }}/420/320"
+                                alt="Ảnh minh họa của {{ item.name }}"
+                                onerror="
+                                    this.hidden = true;
+                                    this.nextElementSibling.hidden = false;
+                                "
+                            >
+
+                            <div
+                                class="photo-placeholder"
+                                hidden
+                            >
+                                {{ item.name[0]|upper }}
+                            </div>
+                        </div>
+
+                        <span class="card-name">
+                            {{ item.name }}
+                        </span>
+                    </button>
+                {% endfor %}
+            </section>
+        {% else %}
+            <section class="empty-state">
+                <p>
+                    Chưa có lời nhắn nào trên tường ảnh.
+                </p>
+
+                <a href="{{ url_for('add') }}">
+                    Viết lời nhắn đầu tiên
+                </a>
+            </section>
+        {% endif %}
+    </main>
+
+    <!-- Hộp thoại xem chi tiết lời nhắn -->
+    <div
+        class="modal-overlay"
+        id="photoModal"
+        aria-hidden="true"
+    >
+        <article class="modal-card">
+            <button
+                class="modal-close"
+                id="closeModal"
+                type="button"
+                aria-label="Đóng"
+            >
+                ×
+            </button>
+
+            <div class="modal-photo">
+                <img
+                    id="modalImage"
+                    src=""
+                    alt="Ảnh kỷ niệm được chọn"
+                >
+
+                <div
+                    class="modal-placeholder"
+                    id="modalPlaceholder"
+                    hidden
+                >
+                    <span id="modalInitial"></span>
+                </div>
+            </div>
+
+            <div class="modal-content">
+                <p class="modal-label">
+                    LỜI NHẮN TỪ
+                </p>
+
+                <h2 id="modalName"></h2>
+
+                <p
+                    class="modal-message"
+                    id="modalMessage"
+                ></p>
+
+                <div class="modal-actions">
+                    <button
+                        class="secondary-button"
+                        id="cancelModal"
+                        type="button"
+                    >
+                        Quay lại
+                    </button>
+
+                    <form
+                        id="deleteForm"
+                        method="POST"
+                        action=""
+                    >
+                        <button
+                            class="delete-button"
+                            type="submit"
+                            onclick="return confirm('Bạn có chắc muốn xóa lời nhắn này?')"
+                        >
+                            Xóa lời nhắn #<span id="modalId"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </div>
+
+    <script>
+        const modal =
+            document.getElementById("photoModal");
+
+        const modalImage =
+            document.getElementById("modalImage");
+
+        const modalPlaceholder =
+            document.getElementById("modalPlaceholder");
+
+        const modalInitial =
+            document.getElementById("modalInitial");
+
+        const memoryCards =
+            document.querySelectorAll(".memory-card");
+
+        const closeButton =
+            document.getElementById("closeModal");
+
+        const cancelButton =
+            document.getElementById("cancelModal");
+
+
+        function openModal(card) {
+            modalImage.hidden = false;
+            modalPlaceholder.hidden = true;
+
+            modalImage.onload = function () {
+                modalImage.hidden = false;
+                modalPlaceholder.hidden = true;
+            };
+
+            modalImage.onerror = function () {
+                modalImage.hidden = true;
+                modalPlaceholder.hidden = false;
+
+                modalInitial.textContent =
+                    card.dataset.initial;
+            };
+
+            modalImage.src =
+                card.dataset.imageUrl;
+
+            document.getElementById(
+                "modalName"
+            ).textContent = card.dataset.name;
+
+            document.getElementById(
+                "modalMessage"
+            ).textContent = card.dataset.message;
+
+            document.getElementById(
+                "modalId"
+            ).textContent = card.dataset.id;
+
+            document.getElementById(
+                "deleteForm"
+            ).action = card.dataset.deleteUrl;
+
+            modal.classList.add("is-open");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+            document.body.classList.add(
+                "modal-open"
+            );
+        }
+
+
+        function closeModal() {
+            modal.classList.remove("is-open");
+
+            modal.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            document.body.classList.remove(
+                "modal-open"
+            );
+        }
+
+
+        memoryCards.forEach(function (card) {
+            card.addEventListener(
+                "click",
+                function () {
+                    openModal(card);
+                }
+            );
+        });
+
+
+        closeButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+        cancelButton.addEventListener(
+            "click",
+            closeModal
+        );
+
+
+        modal.addEventListener(
+            "click",
+            function (event) {
+                if (event.target === modal) {
+                    closeModal();
+                }
+            }
+        );
+
+
+        document.addEventListener(
+            "keydown",
+            function (event) {
+                if (
+                    event.key === "Escape" &&
+                    modal.classList.contains("is-open")
+                ) {
+                    closeModal();
+                }
+            }
+        );
+    </script>
+</body>
+</html>

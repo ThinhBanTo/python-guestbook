@@ -1,0 +1,350 @@
+/* ==================================================
+   THANH ĐIỀU HƯỚNG TRANG ADD
+   ================================================== */
+
+.compose-page .compose-topbar {
+    align-items: center;
+
+    gap: 28px;
+
+    padding: 10px 0 27px;
+}
+
+/* Trở lại tường ảnh: 18px */
+.compose-page .compose-back {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 12px;
+
+    min-height: 44px;
+
+    color: #853f2b;
+
+    font-size: 1.125rem;
+    font-weight: 650;
+
+    line-height: 1.5;
+
+    text-decoration: none;
+}
+
+.compose-page .compose-back > span {
+    font-size: 1.55rem;
+    font-weight: 400;
+
+    line-height: 1;
+
+    transition: transform 180ms ease;
+}
+
+.compose-page .compose-back:hover {
+    color: #55281b;
+}
+
+.compose-page .compose-back:hover > span {
+    transform: translateX(-5px);
+}
+
+
+/* ==================================================
+   NHÃN KỶ YẾU GÓC TRÊN BÊN PHẢI
+   ================================================== */
+
+.compose-page .compose-edition {
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    max-width: none;
+
+    color: #854932;
+
+    font-size: inherit;
+
+    letter-spacing: normal;
+    text-align: left;
+}
+
+.compose-page .compose-edition strong {
+    display: block;
+
+    color: #854932;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 700;
+
+    line-height: 1.5;
+    letter-spacing: 0.1em;
+}
+
+.compose-edition-year {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9a8064;
+
+    font-size: 0.7rem;
+    font-weight: 500;
+
+    line-height: 1.5;
+    letter-spacing: 0.15em;
+}
+
+/* Biểu tượng hình thoi đôi */
+.compose-edition-mark {
+    position: relative;
+
+    display: block;
+
+    width: 29px;
+    height: 29px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #a16443;
+
+    transform: rotate(45deg);
+}
+
+.compose-edition-mark::after {
+    position: absolute;
+    inset: 6px;
+
+    content: "";
+
+    border: 1px solid #b1825d;
+}
+
+
+/* ==================================================
+   NHÃN LƯU BÚT TỐT NGHIỆP
+   ================================================== */
+
+.compose-page .compose-intro {
+    padding-top: 12px;
+}
+
+.compose-page .compose-eyebrow {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 12px;
+
+    max-width: 100%;
+
+    margin: 0 0 27px;
+    padding: 12px 14px;
+
+    color: #8b4930;
+
+    background:
+        linear-gradient(
+            115deg,
+            rgba(255, 252, 243, 0.9),
+            rgba(237, 221, 194, 0.72)
+        );
+
+    border: 1px solid #bc956b80;
+    border-radius: 2px;
+
+    box-shadow:
+        0 3px 0 rgba(141, 101, 55, 0.06);
+}
+
+/* Bỏ đường kẻ nhỏ của phiên bản trước */
+.compose-page .compose-eyebrow::before {
+    display: none;
+
+    content: none;
+}
+
+.compose-eyebrow-icon {
+    display: grid;
+
+    width: 34px;
+    height: 34px;
+
+    flex-shrink: 0;
+
+    color: #9c6541;
+
+    place-items: center;
+}
+
+.compose-eyebrow-icon svg {
+    display: block;
+}
+
+.compose-eyebrow-text {
+    min-width: 0;
+
+    color: #8b4930;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+
+    line-height: 1.5;
+    letter-spacing: 0.09em;
+}
+
+.compose-eyebrow-year {
+    flex-shrink: 0;
+
+    padding-left: 12px;
+
+    color: #a47f57;
+
+    font-size: 0.72rem;
+    font-weight: 600;
+
+    line-height: 1.8;
+    letter-spacing: 0.07em;
+
+    border-left: 1px solid #b99a7370;
+}
+
+
+/* ==================================================
+   TABLET VÀ ĐIỆN THOẠI
+   ================================================== */
+
+@media (max-width: 900px) {
+    .compose-page .compose-back {
+        font-size: 1.04rem;
+    }
+
+    .compose-page .compose-edition strong {
+        font-size: 0.94rem;
+    }
+
+    .compose-page .compose-edition {
+        gap: 13px;
+    }
+
+    .compose-eyebrow-text {
+        font-size: 0.91rem;
+    }
+
+    .compose-page .compose-eyebrow {
+        gap: 10px;
+
+        padding: 11px 12px;
+    }
+}
+
+@media (max-width: 680px) {
+    .compose-page .compose-topbar {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 19px;
+
+        padding-top: 4px;
+        padding-bottom: 23px;
+    }
+
+    .compose-page .compose-back {
+        min-height: 40px;
+
+        font-size: 1.05rem;
+    }
+
+    .compose-page .compose-edition {
+        gap: 14px;
+
+        margin-left: 5px;
+    }
+
+    .compose-page .compose-edition strong {
+        font-size: 0.96rem;
+    }
+
+    .compose-edition-year {
+        font-size: 0.66rem;
+    }
+
+    .compose-edition-mark {
+        width: 25px;
+        height: 25px;
+    }
+
+    .compose-edition-mark::after {
+        inset: 5px;
+    }
+
+    .compose-page .compose-intro {
+        padding-top: 0;
+    }
+
+    .compose-page .compose-eyebrow {
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 440px) {
+    .compose-page .compose-back {
+        gap: 10px;
+
+        font-size: 1rem;
+    }
+
+    .compose-page .compose-back > span {
+        font-size: 1.4rem;
+    }
+
+    .compose-page .compose-edition strong {
+        font-size: 0.9rem;
+
+        letter-spacing: 0.08em;
+    }
+
+    .compose-page .compose-eyebrow {
+        gap: 9px;
+
+        padding: 11px 10px;
+    }
+
+    .compose-eyebrow-icon {
+        width: 29px;
+        height: 29px;
+    }
+
+    .compose-eyebrow-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .compose-eyebrow-text {
+        font-size: 0.84rem;
+
+        letter-spacing: 0.06em;
+    }
+
+    .compose-eyebrow-year {
+        padding-left: 9px;
+
+        font-size: 0.64rem;
+    }
+}
+
+
+/* ==================================================
+   GIẢM CHUYỂN ĐỘNG
+   ================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .compose-page .compose-back > span {
+        transition: none;
+    }
+
+    .compose-page .compose-back:hover > span {
+        transform: none;
+    }
+}

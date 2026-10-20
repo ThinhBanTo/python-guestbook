@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Viết lưu bút mới</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css', v='compose-5') }}"
+    >
+
+    <!-- CSS điều chỉnh riêng cho trang thêm lưu bút -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='add.css', v='1') }}"
+    >
+</head>
+
+<body class="form-page compose-page">
+    <!-- Nền sao băng -->
+    <div class="background-scene" aria-hidden="true">
+        <div class="background-glow"></div>
+        <div class="background-stars"></div>
+
+        <div class="meteor-field">
+            <span
+                class="meteor"
+                style="--x: 18%; --y: -8%; --duration: 3.4s; --delay: -1.1s; --length: 210px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 92%; --y: -4%; --duration: 3.8s; --delay: -2.6s; --length: 250px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 12%; --y: 25%; --duration: 3.2s; --delay: -0.8s; --length: 190px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 105%; --y: 23%; --duration: 4s; --delay: -3.1s; --length: 270px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 25%; --y: 52%; --duration: 3.7s; --delay: -2s; --length: 220px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 98%; --y: 48%; --duration: 3.5s; --delay: -0.4s; --length: 230px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 48%; --y: -18%; --duration: 4.4s; --delay: -2.3s; --length: 260px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 78%; --y: -12%; --duration: 4.1s; --delay: -1.5s; --length: 240px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 18%; --y: 80%; --duration: 3.8s; --delay: -2.8s; --length: 180px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 108%; --y: 74%; --duration: 3.6s; --delay: -1.3s; --length: 250px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 59%; --y: 73%; --duration: 4.6s; --delay: -3.7s; --length: 200px;"
+            ></span>
+
+            <span
+                class="meteor"
+                style="--x: 94%; --y: 8%; --duration: 4.8s; --delay: -4.2s; --length: 290px;"
+            ></span>
+        </div>
+    </div>
+
+    <div class="compose-wrap">
+        <header class="compose-topbar">
+            <a
+                class="compose-back"
+                href="{{ url_for('index') }}"
+            >
+                <span aria-hidden="true">←</span>
+                Trở lại tường ảnh
+            </a>
+
+            <div class="compose-edition">
+                <span
+                    class="compose-edition-mark"
+                    aria-hidden="true"
+                ></span>
+
+                <div>
+                    <strong>KỶ YẾU TỐT NGHIỆP</strong>
+
+                    <span class="compose-edition-year">
+                        NIÊN KHÓA · 2026
+                    </span>
+                </div>
+            </div>
+        </header>
+
+        <main class="compose-grid">
+            <section class="compose-intro">
+                <!-- Nhãn trang trí mới -->
+                <p class="compose-eyebrow">
+                    <span
+                        class="compose-eyebrow-icon"
+                        aria-hidden="true"
+                    >
+                        <svg
+                            width="31"
+                            height="31"
+                            viewBox="0 0 32 32"
+                            fill="none"
+                        >
+                            <path
+                                d="M3 12L16 6L29 12L16 18L3 12Z"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linejoin="round"
+                            ></path>
+
+                            <path
+                                d="M8 15V22C12 26 20 26 24 22V15"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></path>
+
+                            <path
+                                d="M29 12V22M27.5 25L29 22L30.5 25"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></path>
+                        </svg>
+                    </span>
+
+                    <span class="compose-eyebrow-text">
+                        LƯU BÚT TỐT NGHIỆP
+                    </span>
+
+                    <span class="compose-eyebrow-year">
+                        2026
+                    </span>
+                </p>
+
+                <h1 class="compose-title">
+                    Viết lời nhắn<br>
+                    của bạn
+                </h1>
+
+                <p class="compose-description">
+                    Viết một lời chúc, một kỷ niệm hoặc điều bạn
+                    muốn nhắn gửi tới mọi người trước ngày ra trường.
+                </p>
+
+                <div class="compose-preview">
+                    <figure class="compose-polaroid">
+                        <div class="compose-photo">
+                            <img
+                                id="photoPreview"
+                                alt="Ảnh kỷ niệm xem trước"
+                                hidden
+                            >
+
+                            <div
+                                class="compose-photo-empty"
+                                id="photoEmpty"
+                            >
+                                <svg
+                                    width="68"
+                                    height="68"
+                                    viewBox="0 0 68 68"
+                                    fill="none"
+                                    aria-hidden="true"
+                                >
+                                    <rect
+                                        x="12"
+                                        y="14"
+                                        width="44"
+                                        height="40"
+                                        rx="2"
+                                        stroke="currentColor"
+                                        stroke-width="1.4"
+                                    ></rect>
+
+                                    <circle
+                                        cx="26"
+                                        cy="28"
+                                        r="5"
+                                        stroke="currentColor"
+                                        stroke-width="1.4"
+                                    ></circle>
+
+                                    <path
+                                        d="M13 47L27 35L36 43L44 36L55 47"
+                                        stroke="currentColor"
+                                        stroke-width="1.4"
+                                        stroke-linejoin="round"
+                                    ></path>
+                                </svg>
+
+                                <span>
+                                    Một tấm ảnh,<br>
+                                    một câu chuyện.
+                                </span>
+                            </div>
+                        </div>
+
+                        <figcaption class="compose-preview-caption">
+                            <strong id="namePreview">
+                                Tên của bạn
+                            </strong>
+
+                            <span>
+                                Kỷ niệm ngày ra trường
+                            </span>
+                        </figcaption>
+                    </figure>
+
+                    <div
+                        class="compose-stamp"
+                        aria-hidden="true"
+                    >
+                        <span>CLASS OF</span>
+                        <strong>2026</strong>
+                        <span>MEMORIES</span>
+                    </div>
+                </div>
+
+                <p class="compose-preview-note">
+                    Ảnh và tên của bạn sẽ xuất hiện ở đây khi chọn.
+                </p>
+            </section>
+
+            <section
+                class="compose-paper"
+                aria-labelledby="composeFormTitle"
+            >
+                <div class="compose-paper-heading">
+                    <span
+                        class="compose-paper-mark"
+                        aria-hidden="true"
+                    >✦</span>
+
+                    <div>
+                        <p class="compose-paper-eyebrow">
+                            GỬI LẠI MỘT KỶ NIỆM
+                        </p>
+
+                        <h2 id="composeFormTitle">
+                            Những điều bạn muốn nói
+                        </h2>
+                    </div>
+                </div>
+
+                {% if error %}
+                    <div
+                        class="compose-error"
+                        role="alert"
+                    >
+                        {{ error }}
+                    </div>
+                {% endif %}
+
+                <form
+                    action="{{ url_for('add') }}"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+                    <div class="compose-field">
+                        <div class="compose-field-heading">
+                            <label for="name">
+                                Tên người gửi
+                            </label>
+
+                            <span>Bắt buộc</span>
+                        </div>
+
+                        <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            value="{{ name or '' }}"
+                            maxlength="50"
+                            placeholder="Ví dụ: Minh Đức"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="compose-field">
+                        <div class="compose-field-heading">
+                            <label for="message">
+                                Lời nhắn
+                            </label>
+
+                            <span id="messageCount">
+                                0 / 500
+                            </span>
+                        </div>
+
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="6"
+                            maxlength="500"
+                            placeholder="Có điều gì bạn vẫn chưa kịp nói?"
+                            required
+                        >{{ message or '' }}</textarea>
+                    </div>
+
+                    <div class="compose-field">
+                        <div class="compose-field-heading">
+                            <label for="image">
+                                Ảnh kỷ niệm
+                            </label>
+
+                            <span>Không bắt buộc</span>
+                        </div>
+
+                        <div class="compose-upload">
+                            <input
+                                class="compose-file-native"
+                                id="image"
+                                name="image"
+                                type="file"
+                                accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                                aria-describedby="imageHelp uploadError"
+                            >
+
+                            <label
+                                class="compose-upload-card"
+                                for="image"
+                            >
+                                <span
+                                    class="compose-upload-icon"
+                                    aria-hidden="true"
+                                >
+                                    <svg
+                                        width="25"
+                                        height="25"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                    >
+                                        <path
+                                            d="M12 16V4M7 9L12 4L17 9M4 15V20H20V15"
+                                            stroke="currentColor"
+                                            stroke-width="1.5"
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                        ></path>
+                                    </svg>
+                                </span>
+
+                                <span class="compose-upload-copy">
+                                    <strong id="selectedFileName">
+                                        Chọn ảnh từ thiết bị
+                                    </strong>
+
+                                    <small id="imageHelp">
+                                        JPG, PNG hoặc WEBP · tối đa 5 MB
+                                    </small>
+                                </span>
+
+                                <span
+                                    class="compose-upload-arrow"
+                                    aria-hidden="true"
+                                >↗</span>
+                            </label>
+                        </div>
+
+                        <p
+                            class="compose-upload-error"
+                            id="uploadError"
+                            role="alert"
+                            hidden
+                        ></p>
+
+                        <button
+                            class="compose-remove-photo"
+                            id="removePhoto"
+                            type="button"
+                            hidden
+                        >
+                            Bỏ ảnh đã chọn
+                        </button>
+                    </div>
+
+                    <div class="compose-actions">
+                        <a
+                            class="compose-cancel"
+                            href="{{ url_for('index') }}"
+                        >
+                            Hủy
+                        </a>
+
+                        <button
+                            class="compose-submit"
+                            type="submit"
+                        >
+                            <span>Đăng lưu bút</span>
+                            <span aria-hidden="true">↗</span>
+                        </button>
+                    </div>
+                </form>
+
+                <p class="compose-paper-footer">
+                    Một lời nhắn nhỏ, một kỷ niệm thật lâu.
+                </p>
+            </section>
+        </main>
+
+        <footer class="compose-footer">
+            <span>
+                Lưu lại hôm nay, nhớ về mai sau.
+            </span>
+
+            <button
+                class="background-toggle"
+                id="backgroundToggle"
+                type="button"
+                aria-pressed="true"
+            >
+                Tắt hiệu ứng nền
+            </button>
+        </footer>
+    </div>
+
+    <script>
+        /*
+         * XEM TRƯỚC TÊN VÀ ẢNH
+         */
+        const nameInput =
+            document.getElementById("name");
+
+        const messageInput =
+            document.getElementById("message");
+
+        const imageInput =
+            document.getElementById("image");
+
+        const namePreview =
+            document.getElementById("namePreview");
+
+        const photoPreview =
+            document.getElementById("photoPreview");
+
+        const photoEmpty =
+            document.getElementById("photoEmpty");
+
+        const selectedFileName =
+            document.getElementById("selectedFileName");
+
+        const removePhoto =
+            document.getElementById("removePhoto");
+
+        const uploadError =
+            document.getElementById("uploadError");
+
+        const messageCount =
+            document.getElementById("messageCount");
+
+        let previewUrl = "";
+
+        function updateTextPreview() {
+            namePreview.textContent =
+                nameInput.value.trim() || "Tên của bạn";
+
+            messageCount.textContent =
+                messageInput.value.length + " / 500";
+        }
+
+        function clearPhoto() {
+            imageInput.value = "";
+
+            photoPreview.hidden = true;
+            photoPreview.removeAttribute("src");
+
+            photoEmpty.hidden = false;
+            removePhoto.hidden = true;
+
+            selectedFileName.textContent =
+                "Chọn ảnh từ thiết bị";
+
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+                previewUrl = "";
+            }
+        }
+
+        imageInput.addEventListener("change", function () {
+            uploadError.hidden = true;
+
+            const file = imageInput.files[0];
+
+            if (!file) {
+                clearPhoto();
+                return;
+            }
+
+            const allowedType =
+                !file.type ||
+                [
+                    "image/jpeg",
+                    "image/png",
+                    "image/webp"
+                ].includes(file.type);
+
+            const allowedName =
+                /\.(jpe?g|png|webp)$/i.test(file.name);
+
+            const maximumSize = 5 * 1024 * 1024;
+
+            if (
+                !allowedType ||
+                !allowedName ||
+                file.size > maximumSize
+            ) {
+                clearPhoto();
+
+                uploadError.textContent =
+                    !allowedType || !allowedName
+                        ? "Vui lòng chọn ảnh JPG, PNG hoặc WEBP."
+                        : "Ảnh phải có dung lượng không quá 5 MB.";
+
+                uploadError.hidden = false;
+                return;
+            }
+
+            if (previewUrl) {
+                URL.revokeObjectURL(previewUrl);
+            }
+
+            previewUrl = URL.createObjectURL(file);
+
+            photoPreview.src = previewUrl;
+            photoPreview.hidden = false;
+
+            photoEmpty.hidden = true;
+            removePhoto.hidden = false;
+
+            selectedFileName.textContent = file.name;
+        });
+
+        photoPreview.addEventListener("error", function () {
+            if (!previewUrl) {
+                return;
+            }
+
+            clearPhoto();
+
+            uploadError.textContent =
+                "Không đọc được ảnh này. Bạn hãy chọn ảnh khác.";
+
+            uploadError.hidden = false;
+        });
+
+        removePhoto.addEventListener("click", function () {
+            clearPhoto();
+            uploadError.hidden = true;
+        });
+
+        nameInput.addEventListener(
+            "input",
+            updateTextPreview
+        );
+
+        messageInput.addEventListener(
+            "input",
+            updateTextPreview
+        );
+
+        updateTextPreview();
+
+
+        /*
+         * ĐIỀU KHIỂN NỀN SAO BĂNG
+         */
+        const backgroundToggle =
+            document.getElementById("backgroundToggle");
+
+        const motionPreference = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        );
+
+        let backgroundEnabled = true;
+
+        function updateBackground() {
+            const reduced = motionPreference.matches;
+
+            document.body.classList.toggle(
+                "background-paused",
+                !backgroundEnabled ||
+                reduced ||
+                document.hidden
+            );
+
+            backgroundToggle.disabled = reduced;
+
+            backgroundToggle.setAttribute(
+                "aria-pressed",
+                String(backgroundEnabled && !reduced)
+            );
+
+            backgroundToggle.textContent = reduced
+                ? "Thiết bị đang giảm chuyển động"
+                : backgroundEnabled
+                    ? "Tắt hiệu ứng nền"
+                    : "Bật hiệu ứng nền";
+        }
+
+        backgroundToggle.addEventListener(
+            "click",
+            function () {
+                backgroundEnabled = !backgroundEnabled;
+                updateBackground();
+            }
+        );
+
+        motionPreference.addEventListener(
+            "change",
+            updateBackground
+        );
+
+        document.addEventListener(
+            "visibilitychange",
+            updateBackground
+        );
+
+        updateBackground();
+    </script>
+</body>
+</html>
